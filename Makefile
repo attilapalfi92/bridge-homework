@@ -10,4 +10,10 @@ build-docker:
 build: build-gradle build-docker
 
 compose-up:
-	docker-compose -f distribution/docker/docker-compose.yml up
+	docker-compose -f distribution/docker/docker-compose.yml
+
+compose-up-test:
+	docker-compose -f distribution/docker/docker-compose-test.yml up
+
+run-tests:
+	./gradlew test
