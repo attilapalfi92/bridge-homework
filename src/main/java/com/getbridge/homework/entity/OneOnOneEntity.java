@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-@Entity
-public class OneOnOne {
+@Entity(name = "OneOnOne")
+public class OneOnOneEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   private String title;
 
@@ -21,23 +21,21 @@ public class OneOnOne {
 
   @OneToOne
   @JoinColumn(name = "participant_1")
-  private Employee participant1;
+  private EmployeeEntity participant1;
 
   @OneToOne
   @JoinColumn(name = "participant_2")
-  private Employee participant2;
+  private EmployeeEntity participant2;
 
-  //  @Column(name = "planned_date")
   private Timestamp plannedDate;
 
-  //  @Column(name = "location")
   private String location;
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -57,19 +55,19 @@ public class OneOnOne {
     this.description = description;
   }
 
-  public Employee getParticipant1() {
+  public EmployeeEntity getParticipant1() {
     return participant1;
   }
 
-  public void setParticipant1(Employee participant1) {
+  public void setParticipant1(EmployeeEntity participant1) {
     this.participant1 = participant1;
   }
 
-  public Employee getParticipant2() {
+  public EmployeeEntity getParticipant2() {
     return participant2;
   }
 
-  public void setParticipant2(Employee participant2) {
+  public void setParticipant2(EmployeeEntity participant2) {
     this.participant2 = participant2;
   }
 
