@@ -47,8 +47,14 @@ public class OneOnOneService {
     Optional<OneOnOneEntity> oneOnOne = oneOnOneRepository.findById(id);
     if (oneOnOne.isEmpty()) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    } else {
+      if (oneOnOne.get().isClosed()) {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "One on one is already closed, cannot be edited.");
+      }
     }
-    return entityToResponse(oneOnOneRepository.save(requestToEntity(update)));
+    OneOnOneEntity entity = requestToEntity(update);
+    entity.setId(id);
+    return entityToResponse(oneOnOneRepository.save(entity));
   }
 
   private OneOnOneEntity requestToEntity(OneOneOneRequest request) {
@@ -63,6 +69,7 @@ public class OneOnOneService {
     entity.setParticipant2(participant2);
     entity.setPlannedDate(Timestamp.from(request.getPlannedDate().toInstant(ZoneOffset.UTC)));
     entity.setTitle(request.getTitle());
+    entity.setClosed(request.isClosed());
     return entity;
   }
 
@@ -75,6 +82,7 @@ public class OneOnOneService {
     response.setTitle(entity.getTitle());
     response.setParticipantId1(entity.getParticipant1().getId());
     response.setParticipantId2(entity.getParticipant2().getId());
+    response.setClosed(entity.isClosed());
     return response;
   }
 }

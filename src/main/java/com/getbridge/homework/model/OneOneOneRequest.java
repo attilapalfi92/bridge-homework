@@ -11,6 +11,7 @@ public class OneOneOneRequest {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private LocalDateTime plannedDate;
   private String location;
+  private boolean closed;
 
   public String getTitle() {
     return title;
@@ -58,5 +59,13 @@ public class OneOneOneRequest {
 
   public void setLocation(String location) {
     this.location = location;
+  }
+
+  public boolean isClosed() {
+    return closed;
+  }
+
+  public void setClosed(boolean closed) {
+    this.closed = closed;
   }
 }

@@ -14,9 +14,7 @@ public class OneOnOneEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
   private String title;
-
   private String description;
 
   @OneToOne
@@ -28,8 +26,8 @@ public class OneOnOneEntity {
   private EmployeeEntity participant2;
 
   private Timestamp plannedDate;
-
   private String location;
+  private boolean closed;
 
   public Long getId() {
     return id;
@@ -85,5 +83,13 @@ public class OneOnOneEntity {
 
   public void setLocation(String location) {
     this.location = location;
+  }
+
+  public boolean isClosed() {
+    return closed;
+  }
+
+  public void setClosed(boolean closed) {
+    this.closed = closed;
   }
 }
