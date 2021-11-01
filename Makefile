@@ -6,3 +6,8 @@ build-gradle:
 
 build-docker:
 	docker build -f distribution/docker/Dockerfile --build-arg JAR_FILE=build/libs/\*.jar -t getbridge/bridge-homework-apalfi:0.0.1-SNAPSHOT .
+
+build: build-gradle build-docker
+
+compose-up:
+	docker-compose -f distribution/docker/docker-compose.yml up
