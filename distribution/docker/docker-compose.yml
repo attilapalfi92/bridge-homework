@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  homework:
+    image: docker.io/getbridge/bridge-homework-apalfi:0.0.1-SNAPSHOT
+    environment:
+      spring_datasource_url: jdbc:postgresql://postgres:5432/bridge
+    ports:
+      - 8080:8080
+    networks:
+      - getbridge_network
+
+  postgres:
+    image: postgres:alpine # use latest official postgres version
+    env_file:
+      - postgres.env # configure postgres
+    volumes:
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    networks:
+      - getbridge_network
+    ports:
+      - 5432:5432
+
+networks:
+  getbridge_network:
+    name: getbridge_network
+
+volumes:
+  postgres-data: # named volumes can be managed easier using docker-compose
+    name: postgres-data
