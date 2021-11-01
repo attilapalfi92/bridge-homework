@@ -26,6 +26,11 @@ public class OneOnOneController {
     return oneOnOneService.list();
   }
 
+  @GetMapping("/one-on-one/search/{closed}")
+  public List<OneOneOneResponse> search(@PathVariable("closed") boolean closed) {
+    return oneOnOneService.search(closed);
+  }
+
   @GetMapping("/one-on-one/{id}")
   public ResponseEntity<OneOneOneResponse> get(@PathVariable("id") long id) {
     return oneOnOneService

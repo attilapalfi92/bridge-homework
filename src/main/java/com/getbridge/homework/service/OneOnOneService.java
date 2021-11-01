@@ -57,6 +57,12 @@ public class OneOnOneService {
     return entityToResponse(oneOnOneRepository.save(entity));
   }
 
+  public List<OneOneOneResponse> search(boolean closed) {
+    return oneOnOneRepository.findByClosed(closed).stream()
+        .map(this::entityToResponse)
+        .collect(Collectors.toList());
+  }
+
   private OneOnOneEntity requestToEntity(OneOneOneRequest request) {
     OneOnOneEntity entity = new OneOnOneEntity();
     entity.setDescription(request.getDescription());
